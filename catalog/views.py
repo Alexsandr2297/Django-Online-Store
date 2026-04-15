@@ -1,5 +1,4 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 
-
-def models(request):
-    return render(request, 'models')
+def index(request):
+    return HttpResponse("Добро пожаловать в интернет-магазин!")
