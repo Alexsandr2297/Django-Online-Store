@@ -1,0 +1,53 @@
+{% extends 'blog_base.html'%}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    {% if blog.picture %}
+                        <div class="text-center">
+                            <img src="{{ blog.picture.url }}" class="img-fluid">
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h2 class="text-center">{{ blog.heading }}</h2>
+
+                        
+                        <div class="card-text">
+                            <strong>Содержимое:</strong>
+                            {{ blog.content|safe|linebreaks }}
+                        </div>
+
+                        <hr>
+                        <p class="card-text">Дата создания: {{ blog.created_at|date:"d M Y" }}</p>
+                        <p class="card-text">Публикация: {{ blog.publication_attribute }}</p>
+                        <p class="card-text">Количество просмотров: {{ blog.quantity_views }}</p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="{% url 'blog:blog_list' %}" role="button">Назад</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Дополнительное центрирование таблиц */
+    .card-body table {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: center !important;
+    }
+    .card-body td, .card-body th {
+        text-align: center !important;
+        padding: 8px;
+    }
+</style>
+
+{% endblock %}
