@@ -18,11 +18,11 @@ class BlogDetailView(DetailView):
     template_name = 'blog_detail.html'
     context_object_name = 'blog'
 
-    def get_object(self, queryset = None):
-        self.object = super().get_object(queryset)
-        self.object.quantity_views += 1
-        self.object.save()
-        return self.object
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        obj.quantity_views += 1
+        obj.save(update_fields=['quantity_views'])
+        return obj
 
 
 class BlogCreateView(CreateView):
