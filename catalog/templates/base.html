@@ -189,7 +189,11 @@
             </ul>
         </div>
         <header data-bs-theme="dark">
-        {% include 'includes/inc_menu.html' %}
+
+
+
+
+            {% include 'includes/inc_menu.html' %}
         </header>
         <main>
             <section class="py-5 text-center container">
@@ -199,6 +203,7 @@
                         <p class="lead text-body-secondary">
                             Электромаркет
                         </p>
+                        <a class="btn btn-primary" href="{% url 'catalog:catalog_create' %}" role="button">Создать новый продукт</a>
                         <p>
                             <a href="#" class="btn btn-primary my-2">Main call to action</a> <a href="#" class="btn btn-secondary my-2">Secondary
                             action</a>

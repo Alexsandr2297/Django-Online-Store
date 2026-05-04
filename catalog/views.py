@@ -1,16 +1,27 @@
-from django.shortcuts import render, get_object_or_404
 from catalog.models import Product
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .forms import ProductForm
+from django.urls import reverse_lazy, reverse
 
 class ProductListView(ListView):
     model = Product
     template_name = 'catalog_list.html'
     context_object_name = 'catalogs'
 
-# def catalog_list(request):
-#     catalog = Product.objects.all()
-#     context = {"catalogs": catalog}
-#     return render(request, 'catalog_list.html', context)
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog_form.html'
+    success_url = reverse_lazy('catalog:catalog_list')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog_form.html'
+    success_url = reverse_lazy('catalog:catalog_list')
+
 
 
 class ProductDetailView(DetailView):
@@ -19,7 +30,7 @@ class ProductDetailView(DetailView):
     context_object_name = 'catalog'
 
 
-# def catalog_detail(request, pk):
-#     catalogs = get_object_or_404(Product, pk=pk)
-#     context = {"catalog": catalogs}
-#     return render(request, 'catalog_detail.html', context)
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'catalog_confirm_delete.html'
+    success_url = reverse_lazy('catalog:catalog_list')
