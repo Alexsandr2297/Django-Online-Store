@@ -35,12 +35,3 @@ class ProductForm(FormStylingMixin, forms.ModelForm):
                 raise ValidationError("Цена не может быть отрицательной")
 
         return price
-
-    def clean_picture(self):
-        picture = self.cleaned_data.get('picture')
-        if picture:
-            if picture.size > 5 * 1024 * 1024:  # Проверка на размер > 5MB
-                raise ValidationError("Размер изображения не должен превышать 5MB.")
-            if picture.image.format not in ['JPEG', 'PNG']:
-                raise ValidationError("Изображение должно быть в формате JPEG или PNG.")
-        return picture
